@@ -1,0 +1,16 @@
+{
+  "name": "quarto-progetto-api-javascript-advanced",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./input.css -o ./assets/css/style.css",
+    "watch": "npx tailwindcss -i ./input.css -o ./assets/css/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

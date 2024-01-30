@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" property="og:type" content="Online Library">
+    <meta property="og:url" content="">
+    <meta name="description" property="og:title" content="Search Egine for Books">
+    <meta name="author" content="Claudio Fanzini">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="icon" type="images/x-icon" href="assets/images/logo-bg-remove.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+
+    <header class="flex h-40 items-center gap-14 justify-start flex-wrap bg-[#3e454b]">
+        <h1 class="order-2 font-bold font-serif text-5xl text-white max-[420px]:text-lg max-[780px]:text-3xl">LibraRead</h1>
+        <img src="assets/images/logo-bg-remove.png" class="h-full max-[420px]:h-1/2 max-[780px]:h-2/3">
+    </header>
+
+    <div class="flex flex-col items-center justify-evenly h-48 mt-40">
+        <h2 class="text-2xl font-mono">Trova il tuo libro</h2>
+        <div class="flex w-1/2 gap-2">
+            <input value="" type="text" placeholder="Cerca" id="book-searched" class="w-9/12 border rounded-xl p-2 focus:outline-none focus:border-sky-500">
+            <select name="select" id="select" class="w-2/12 rounded-lg px-2 max-[780px]:px-1 max-[420px]:px-0 border">
+                <option selected="selected" value="Tutto">Tutto</option>
+                <option value="Argomento">Argomento</option>
+            </select>
+        </div>
+        <input value="Cerca" id="search" type="submit" class="border rounded-lg p-1 hover:bg-slate-200 active:bg-sky-300 cursor-pointer">
+    </div>
+
+    <div id="elements" class="flex flex-wrap justify-center"></div>
+</body>
+</html>
