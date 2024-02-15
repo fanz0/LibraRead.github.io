@@ -10,14 +10,15 @@ button.addEventListener("click", () => {
     fetch(`https://openlibrary.org/search.json?q=${bookSearched.value}`)
         .then(response => response.json())
         .then(data => {
-            let arrData = data.docs;
-            (arrData || []).forEach( element => {
-                let {cover_i, title, author_name, publish_year, key} = element
-                addValue(title, author_name, publish_year, cover_i, key)
-            })
-            ;
+            if (data) {
+                    let arrData = data.docs;
+                    (arrData || []).forEach( element => {
+                        let {cover_i, title, author_name, publish_year, key} = element
+                        addValue(title, author_name, publish_year, cover_i, key)
+                    })
+            }
         })
-        .catch(e => console.log(e))
+        .catch(e => console.log("Errore: ", e))
 })
 
 
@@ -78,19 +79,21 @@ function addValue(title, author, date, cover_id, key) {
     fetch(`https://openlibrary.org${key}.json`)
         .then(response => response.json())
         .then(data => {
-            let {description} = data
-            if (description != undefined && typeof description != "object") {
-                descriptionParagraph.textContent = description
-                descriptionParagraph.className = "my-4 overflow-y-auto hidden"
-                div.appendChild(readMore)
-            } else if (description != undefined && typeof description == "object") {
-                let {value} = description
-                descriptionParagraph.textContent = value
-                descriptionParagraph.className = "my-4 overflow-y-auto hidden"
-                div.appendChild(readMore)
-            }       
+            if (data) {
+                let {description} = data
+                if (description != undefined && typeof description != "object") {
+                    descriptionParagraph.textContent = description
+                    descriptionParagraph.className = "my-4 overflow-y-auto hidden"
+                    div.appendChild(readMore)
+                } else if (description != undefined && typeof description == "object") {
+                    let {value} = description
+                    descriptionParagraph.textContent = value
+                    descriptionParagraph.className = "my-4 overflow-y-auto hidden"
+                    div.appendChild(readMore)
+                }       
+            }
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log("Errore: ", error))
 
     information.appendChild(descriptionParagraph)
 
@@ -129,26 +132,29 @@ select.addEventListener("change", () => {
             fetch(`https://openlibrary.org/subjects/${bookSearched.value}.json?limit=100`)
             .then(response => response.json())
             .then(data => {
-                let arrData = data.works
-                arrData.forEach(element => {
-                    let {cover_id, title, authors, first_publish_year, key} = element
-                    authors.forEach(keyObj => {
-                        let authors_name = Object.values(keyObj)[1]
-                        addValue(title, authors_name, first_publish_year, cover_id , key)
+                if (data) {
+                    let arrData = data.works
+                    arrData.forEach(element => {
+                        let {cover_id, title, authors, first_publish_year, key} = element
+                        authors.forEach(keyObj => {
+                            let authors_name = Object.values(keyObj)[1]
+                            addValue(title, authors_name, first_publish_year, cover_id , key)
+                        })
                     })
-                })
+                }
             })
             .catch(e => console.log(e))
         } else if (select.value == "Tutto") {
             fetch(`https://openlibrary.org/search.json?q=${bookSearched.value}`)
             .then(response => response.json())
             .then(data => {
-                let arrData = data.docs;
-                (arrData || []).forEach( element => {
-                    let {cover_i, title, author_name, publish_year, key} = element
-                    addValue(title, author_name, publish_year, cover_i, key)
-                })
-                ;
+                if (data) {
+                    let arrData = data.docs;
+                    (arrData || []).forEach( element => {
+                        let {cover_i, title, author_name, publish_year, key} = element
+                        addValue(title, author_name, publish_year, cover_i, key)
+                    })
+                }
             })
             .catch(e => console.log(e))
         }
